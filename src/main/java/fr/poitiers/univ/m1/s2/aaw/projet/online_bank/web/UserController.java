@@ -3,6 +3,7 @@ package fr.poitiers.univ.m1.s2.aaw.projet.online_bank.web;
 import fr.poitiers.univ.m1.s2.aaw.projet.online_bank.model.AuthToken;
 import fr.poitiers.univ.m1.s2.aaw.projet.online_bank.repository.AuthTokenRepository;
 import fr.poitiers.univ.m1.s2.aaw.projet.online_bank.model.User;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +44,7 @@ class UserController {
 
     @GetMapping("/current")
     ResponseEntity<User> getUserConnected(
-            Authentication authentication
+            @NotNull Authentication authentication
     ) {
         User user = (User) authentication.getPrincipal();
         return ResponseEntity.ok().body(user);
@@ -54,7 +55,7 @@ class UserController {
     public void login(
             @RequestParam String username,
             @RequestParam String password,
-            HttpServletResponse response
+            @NotNull HttpServletResponse response
     ) throws IOException {
         try {
             final Authentication authentication = authenticationManager.authenticate(

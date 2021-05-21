@@ -24,7 +24,9 @@ public class AccountController {
     }
 
     @PostMapping
-    void save(@RequestBody Account comment) {
+    void save(
+            @RequestBody Account comment
+    ) {
         User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         comment.setUser(principal);
         commentRepository.save(comment);
