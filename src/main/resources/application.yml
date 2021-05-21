@@ -6,3 +6,7 @@ com:
     token: XSRF-TOKEN
     header:
       token: X-XSRF-TOKEN
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
