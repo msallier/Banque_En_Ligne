@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 
 @RestController
-@RequestMapping("/api/Account")
+@RequestMapping("/api/account")
 public class AccountController {
 
     private AccountRepository commentRepository;

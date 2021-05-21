@@ -70,7 +70,7 @@ class UserController {
             tokenCookie.setHttpOnly(true);
             tokenCookie.setMaxAge(expiredTime);
             response.addCookie(tokenCookie);
-            response.sendRedirect("/Account");
+            response.sendRedirect("/account");
         } catch (Exception e) {
             response.sendError(HttpStatus.LOCKED.value());
         }
