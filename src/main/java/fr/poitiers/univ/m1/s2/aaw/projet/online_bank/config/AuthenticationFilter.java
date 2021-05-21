@@ -51,7 +51,7 @@ public class AuthenticationFilter extends OncePerRequestFilter {
                 Optional<AuthToken> byId = authTokenRepository.findById(token.getValue());
                 byId.ifPresent((authTokenValue) -> {
                     if (authTokenValue.getExpiredDate().after(new Date())) {
-                        Integer userId = authTokenValue.getUserId();
+                        Long userId = authTokenValue.getUserId();
                         Optional<User> userOpt = userService.findById(userId);
                         userOpt.ifPresent(user -> {
                             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());

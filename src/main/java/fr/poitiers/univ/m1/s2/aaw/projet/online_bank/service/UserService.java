@@ -27,7 +27,7 @@ public class UserService implements UserDetailsService {
         return user;
     }
 
-    public Optional<User> findById(Integer id){
+    public Optional<User> findById(Long id){
         return userRepository.findById(id);
     }
 

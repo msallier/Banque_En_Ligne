@@ -16,7 +16,7 @@ public class AuthToken {
 
     @Id
     private String token;
-    private Integer userId;
+    private Long userId;
     private Date expiredDate;
 
 }
