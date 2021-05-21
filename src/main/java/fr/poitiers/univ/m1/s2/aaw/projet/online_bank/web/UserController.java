@@ -1,7 +1,7 @@
 package fr.poitiers.univ.m1.s2.aaw.projet.online_bank.web;
 
 import fr.poitiers.univ.m1.s2.aaw.projet.online_bank.model.AuthToken;
-import fr.poitiers.univ.m1.s2.aaw.projet.online_bank.model.AuthTokenRepository;
+import fr.poitiers.univ.m1.s2.aaw.projet.online_bank.repository.AuthTokenRepository;
 import fr.poitiers.univ.m1.s2.aaw.projet.online_bank.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,14 +42,20 @@ class UserController {
 
 
     @GetMapping("/current")
-    ResponseEntity<User> getUserConnected(Authentication authentication) {
+    ResponseEntity<User> getUserConnected(
+            Authentication authentication
+    ) {
         User user = (User) authentication.getPrincipal();
         return ResponseEntity.ok().body(user);
     }
 
 
     @PostMapping("/login")
-    public void login(@RequestParam String username, @RequestParam String password, HttpServletResponse response) throws IOException {
+    public void login(
+            @RequestParam String username,
+            @RequestParam String password,
+            HttpServletResponse response
+    ) throws IOException {
         try {
             final Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(

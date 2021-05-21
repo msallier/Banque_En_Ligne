@@ -1,7 +1,7 @@
 package fr.poitiers.univ.m1.s2.aaw.projet.online_bank.service;
 
 import fr.poitiers.univ.m1.s2.aaw.projet.online_bank.model.User;
-import fr.poitiers.univ.m1.s2.aaw.projet.online_bank.model.UserRepository;
+import fr.poitiers.univ.m1.s2.aaw.projet.online_bank.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
