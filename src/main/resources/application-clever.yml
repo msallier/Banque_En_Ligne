@@ -2,5 +2,5 @@ spring:
     datasource:
         username: ${POSTGRESQL_ADDON_USER}
         password: ${POSTGRESQL_ADDON_PASSWORD}
-        url: postgresql://uboyy1v3yxrcusxvoefg:Mw22MXavWmcT3LQx5emH@bzkmvrovghxb03tsfro5-postgresql.services.clever-cloud.com:5432/bzkmvrovghxb03tsfro5
+        url:  ${POSTGRESQL_ADDON_URI}
 
