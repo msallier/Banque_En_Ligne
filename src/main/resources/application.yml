@@ -10,5 +10,6 @@ com:
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-  server:
-    port: 8080
+    username: uboyy1v3yxrcusxvoefg
+    password: Mw22MXavWmcT3LQx5emH
+    url: postgresql://uboyy1v3yxrcusxvoefg:Mw22MXavWmcT3LQx5emH@bzkmvrovghxb03tsfro5-postgresql.services.clever-cloud.com:5432/bzkmvrovghxb03tsfro5
