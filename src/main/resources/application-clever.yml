@@ -3,4 +3,6 @@ spring:
         username: ${POSTGRESQL_ADDON_USER}
         password: ${POSTGRESQL_ADDON_PASSWORD}
         url:  ${POSTGRESQL_ADDON_URI}
+        datasource:
+            driver-class-name: org.postgresql.Driver
 
