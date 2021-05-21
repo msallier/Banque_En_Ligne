@@ -1,7 +1,7 @@
 spring:
-  datasource:
-    username: ${POSTGRESQL_ADDON_USER}
-    password: ${POSTGRESQL_ADDON_PASSWORD}
-    url: ${POSTGRESQL_ADDON_URI}
-  server:
-    port: ${POSTGRESQL_ADDON_PORT}
+    datasource:
+        username: ${POSTGRESQL_ADDON_USER}
+        password: ${POSTGRESQL_ADDON_PASSWORD}
+        url: ${POSTGRESQL_ADDON_URI}
+    server:
+        port: ${POSTGRESQL_ADDON_PORT}
