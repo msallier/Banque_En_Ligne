@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>fr.poitiers.univ.m1.s2.aaw.projet.online_bank</groupId>
-	<artifactId>Banque-en-ligne</artifactId>
+	<artifactId>Banque_En_Ligne</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Banque-en-ligne</name>
 	<description>Projet de AAW, master conception logiciel</description>

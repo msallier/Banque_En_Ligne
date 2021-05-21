@@ -4,4 +4,4 @@ spring:
         password: ${POSTGRESQL_ADDON_PASSWORD}
         url: ${POSTGRESQL_ADDON_URI}
     server:
-        port: ${POSTGRESQL_ADDON_PORT}
+        port: 8080
