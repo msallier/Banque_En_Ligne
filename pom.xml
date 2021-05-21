@@ -85,6 +85,7 @@
 					<execution>
 						<id>yarn install</id>
 						<goals>
+
 							<goal>yarn</goal>
 						</goals>
 						<configuration>
@@ -97,6 +98,7 @@
 					</execution>
 
 					<execution>
+						<goal>cd src\main\resources\app</goal>
 						<id>yarn run build</id>
 						<goals>
 							<goal>yarn</goal>
