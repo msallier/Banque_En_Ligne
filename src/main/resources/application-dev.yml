@@ -1,0 +1,12 @@
+com:
+  auth:
+    token: AUTHTOKEN
+    expired: 30
+  csrf:
+    token: XSRF-TOKEN
+    header:
+      token: X-XSRF-TOKEN
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
