@@ -4,6 +4,6 @@
     "goal": "install"
   },
   "deploy": {
-    "jarName": "target/Banque-en-ligne.jar"
+    "jarName": "target/Banque_En_Ligne.jar"
   }
 }
