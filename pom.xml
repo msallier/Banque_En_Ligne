@@ -101,7 +101,6 @@
 
 						<id>yarn run build</id>
 						<goals>
-							<goal>cd src\main\resources\app</goal>
 							<goal>yarn</goal>
 						</goals>
 						<configuration>
