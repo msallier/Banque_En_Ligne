@@ -28,12 +28,15 @@ public class User implements UserDetails {
     @Column
     private String password;
 
+    @Column String email;
+
     @OneToMany(mappedBy = "user")
     private Collection<Account> account;
 
-    public User(String name, String password){
+    public User(String name, String password, String email){
         this.name=name;
         this.password = password;
+        this.email = email;
     }
 
     @Override
