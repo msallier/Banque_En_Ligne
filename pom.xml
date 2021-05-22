@@ -112,6 +112,7 @@
 						</configuration>
 					</execution>
 				</executions>
+
 			</plugin>
 
 			<plugin>
@@ -127,6 +128,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>Banque_En_Ligne</finalName>
 	</build>
 
 </project>
