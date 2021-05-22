@@ -8,9 +8,7 @@ com:
             token: X-XSRF-TOKEN
 
 spring:
-#    jpa:
-#        properties:
-#            hibernate:
-#                dialect: org.hibernate.dialect.PostgreSQLDialect
+    datasource:
+        driver-class-name: org.postgresql.Driver
     profiles:
         active: clever

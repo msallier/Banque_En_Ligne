@@ -2,7 +2,6 @@ spring:
     datasource:
         username: ${POSTGRESQL_ADDON_USER}
         password: ${POSTGRESQL_ADDON_PASSWORD}
-        url:  ${POSTGRESQL_ADDON_URI}
-        datasource:
-            driver-class-name: org.postgresql.Driver
+        url: jdbc:postgresql://${POSTGRESQL_ADDON_HOST}:${POSTGRESQL_ADDON_PORT}/${POSTGRESQL_ADDON_DB}
+
 
