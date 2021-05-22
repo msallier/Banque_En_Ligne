@@ -9,4 +9,4 @@ com:
 
 spring:
     profiles:
-        active: dev
+        active:
