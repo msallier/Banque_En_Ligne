@@ -29,7 +29,7 @@ public class User implements UserDetails {
     private String password;
 
     @OneToMany(mappedBy = "user")
-    private Account account;
+    private Collection<Account> account;
 
     public User(String name, String password){
         this.name=name;
