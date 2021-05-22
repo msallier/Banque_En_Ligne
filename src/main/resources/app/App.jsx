@@ -14,7 +14,7 @@ export default class extends Component {
     }
 
     componentDidMount() {
-        fetch("/api/ligne-bancaire")
+        fetch("api/user/current")
             .then(response=>response.json())
             .then(lignes => {
                 console.log(lignes);

@@ -67,42 +67,46 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
         web.ignoring().mvcMatchers("/img/**");
     }
 
-    @Override
-    protected void configure(final HttpSecurity http) throws Exception {
-        http
-                .exceptionHandling()
-                .authenticationEntryPoint(new Http403ForbiddenEntryPoint())
-                .and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
-        http
-                .authorizeRequests()
-                .antMatchers("/api/user/login", "/", "/login", "/account", "/error", "/css/*").permitAll()
-                .anyRequest().authenticated();
-
-        http
-                .addFilterBefore(new AuthenticationFilter(authTokenRepository, userDetailsService, authToken), UsernamePasswordAuthenticationFilter.class);
-
-        http
-                .logout()
-                .logoutUrl("/api/user/logout")
-                .logoutSuccessHandler(getLogoutSuccessHandler())
-                .logoutSuccessUrl("/login")
-                .invalidateHttpSession(true)
-                .deleteCookies(authToken, csrfCookieTokenName);
-
-        http
-                .csrf()
-                .requireCsrfProtectionMatcher(request ->
-                        ("/api/user/login".equals(request.getRequestURI())
-                                || ("/api/account".equals(request.getRequestURI()) && HttpMethod.POST.matches(request.getMethod())
-                        ))
-                )
-                .csrfTokenRepository(getCsrfTokenRepository())
-        ;
-
-
-    }
+//    @Override
+//    protected void configure(final HttpSecurity http) throws Exception {
+//        http
+//                .exceptionHandling()
+//                .authenticationEntryPoint(new Http403ForbiddenEntryPoint())
+//                .and()
+//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+//
+//        http
+//                .authorizeRequests()
+//                .antMatchers("/api/user/login").permitAll()
+//                .antMatchers("/").permitAll()
+//                .antMatchers("/login").permitAll()
+//                .antMatchers("/account").permitAll()
+//                .antMatchers("/error").permitAll()
+//                .anyRequest().authenticated();
+//
+//        http
+//                .addFilterBefore(new AuthenticationFilter(authTokenRepository, userDetailsService, authToken), UsernamePasswordAuthenticationFilter.class);
+//
+//        http
+//                .logout()
+//                .logoutUrl("/api/user/logout")
+//                .logoutSuccessHandler(getLogoutSuccessHandler())
+//                .logoutSuccessUrl("/login")
+//                .invalidateHttpSession(true)
+//                .deleteCookies(authToken, csrfCookieTokenName);
+//
+//        http
+//                .csrf()
+//                .requireCsrfProtectionMatcher(request ->
+//                        ("/api/user/login".equals(request.getRequestURI())
+//                                || ("/api/account".equals(request.getRequestURI()) && HttpMethod.POST.matches(request.getMethod())
+//                        ))
+//                )
+//                .csrfTokenRepository(getCsrfTokenRepository())
+//        ;
+//
+//
+//    }
 
 
     private CookieCsrfTokenRepository getCsrfTokenRepository() {
@@ -157,12 +161,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
         return new BCryptPasswordEncoder();
     }
 
-
-    @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("forward:login.html");
-        registry.addViewController("/login").setViewName("forward:login.html");
-        registry.addViewController("/account").setViewName("forward:account.html");
-    }
 
 }

@@ -6,30 +6,23 @@ import fr.poitiers.univ.m1.s2.aaw.projet.online_bank.model.User;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
-
 @RestController
 @RequestMapping("/api/account")
 public class AccountController {
 
-    private AccountRepository commentRepository;
+    private AccountRepository accountRepository;
 
     public AccountController(AccountRepository repo){
-        this.commentRepository = repo;
-    }
-
-    @GetMapping
-    Collection<Account> users() {
-        return commentRepository.findAll();
+        this.accountRepository = repo;
     }
 
     @PostMapping
-    void save(
-            @RequestBody Account comment
+    public void save(
+            @RequestBody Account account
     ) {
         User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        comment.setUser(principal);
-        commentRepository.save(comment);
+        account.setUser(principal);
+        accountRepository.save(account);
     }
 
 }

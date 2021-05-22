@@ -1,11 +1,11 @@
 package fr.poitiers.univ.m1.s2.aaw.projet.online_bank.web;
 
+import fr.poitiers.univ.m1.s2.aaw.projet.online_bank.model.Account;
 import fr.poitiers.univ.m1.s2.aaw.projet.online_bank.model.AuthToken;
 import fr.poitiers.univ.m1.s2.aaw.projet.online_bank.repository.AuthTokenRepository;
 import fr.poitiers.univ.m1.s2.aaw.projet.online_bank.model.User;
+import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -17,16 +17,16 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/user")
 class UserController {
 
-    private final Logger log = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private AuthTokenRepository authTokenRepository;
@@ -37,25 +37,21 @@ class UserController {
     @Value("${com.auth.expired}")
     private int expiredTime;
 
-
     @Autowired
     private AuthenticationManager authenticationManager;
 
-
     @GetMapping("/current")
     ResponseEntity<User> getUserConnected(
-            @NotNull Authentication authentication
+            Authentication authentication
     ) {
         User user = (User) authentication.getPrincipal();
         return ResponseEntity.ok().body(user);
     }
 
-
     @PostMapping("/login")
-    public void login(
+    public ResponseEntity<List<Account>> login(
             @RequestParam String username,
-            @RequestParam String password,
-            @NotNull HttpServletResponse response
+            @RequestParam String password
     ) throws IOException {
         try {
             final Authentication authentication = authenticationManager.authenticate(
@@ -76,11 +72,12 @@ class UserController {
             tokenCookie.setPath("/");
             tokenCookie.setHttpOnly(true);
             tokenCookie.setMaxAge(expiredTime);
-            response.addCookie(tokenCookie);
-            response.sendRedirect("/account");
+            ResponseEntity.ok().body(user.getAccount());
         } catch (Exception e) {
-            response.sendError(HttpStatus.LOCKED.value());
+            log.error("Erreur de connexion", e);
+            ResponseEntity.status(HttpStatus.LOCKED.value());
         }
-
+        return null;
     }
+
 }
