@@ -1,13 +1,15 @@
-package fr.poitiers.univ.m1.s2.aaw.projet.online_bank.web;
+package fr.poitiers.univ.m1.s2.aaw.projet.online_bank.endpoint;
 
-import fr.poitiers.univ.m1.s2.aaw.projet.online_bank.model.Account;
-import fr.poitiers.univ.m1.s2.aaw.projet.online_bank.model.AuthToken;
+import fr.poitiers.univ.m1.s2.aaw.projet.online_bank.entity.Account;
+import fr.poitiers.univ.m1.s2.aaw.projet.online_bank.entity.AuthToken;
+import fr.poitiers.univ.m1.s2.aaw.projet.online_bank.entity.User;
 import fr.poitiers.univ.m1.s2.aaw.projet.online_bank.repository.AuthTokenRepository;
-import fr.poitiers.univ.m1.s2.aaw.projet.online_bank.model.User;
+import fr.poitiers.univ.m1.s2.aaw.projet.online_bank.repository.UserRepository;
+import fr.poitiers.univ.m1.s2.aaw.projet.online_bank.service.AccountService;
 import lombok.extern.slf4j.Slf4j;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,19 +19,25 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-@Slf4j
 @RestController
-@RequestMapping("/api/user")
-class UserController {
+@RequestMapping(path = "api")
+@Slf4j
+public class controller {
 
+    @Autowired
+    public AccountService accountService;
 
     @Autowired
     private AuthTokenRepository authTokenRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Value("${com.auth.token}")
     private String authToken;
@@ -37,21 +45,44 @@ class UserController {
     @Value("${com.auth.expired}")
     private int expiredTime;
 
+
     @Autowired
     private AuthenticationManager authenticationManager;
 
+
+    @GetMapping("/accounts")
+    public List<Account> getAllAccounts(){
+            List<Account> all = accountService.getAllAccount();
+            return all;
+    }
+
+    @GetMapping("/accounts/{id}")
+    List<Account> getUserAccounts(@PathVariable("id") Long id) {
+        List<Account> all = accountService.getAllById(id);
+        return all;
+    }
+
+
+
     @GetMapping("/current")
-    ResponseEntity<User> getUserConnected(
-            Authentication authentication
-    ) {
+    public ResponseEntity<User> getUserConnected(Authentication authentication) {
         User user = (User) authentication.getPrincipal();
         return ResponseEntity.ok().body(user);
     }
 
+    @GetMapping("/{id}")
+    ResponseEntity<User> getUserConnected(@PathVariable("id") Long id) {
+        User user = userRepository.findById(id)
+                .orElse(new User());
+        return ResponseEntity.ok().body(user);
+    }
+
+
     @PostMapping("/login")
-    public ResponseEntity<List<Account>> login(
+    public void login(
             @RequestParam String username,
-            @RequestParam String password
+            @RequestParam String password,
+            HttpServletResponse response
     ) throws IOException {
         try {
             final Authentication authentication = authenticationManager.authenticate(
@@ -72,12 +103,11 @@ class UserController {
             tokenCookie.setPath("/");
             tokenCookie.setHttpOnly(true);
             tokenCookie.setMaxAge(expiredTime);
-            ResponseEntity.ok().body(user.getAccount());
+            response.addCookie(tokenCookie);
+            response.sendRedirect("/espacePerso");
         } catch (Exception e) {
-            log.error("Erreur de connexion", e);
-            ResponseEntity.status(HttpStatus.LOCKED.value());
+            response.sendError(HttpStatus.LOCKED.value());
         }
-        return null;
-    }
 
+    }
 }

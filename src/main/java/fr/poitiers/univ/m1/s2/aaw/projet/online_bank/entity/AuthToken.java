@@ -1,4 +1,4 @@
-package fr.poitiers.univ.m1.s2.aaw.projet.online_bank.model;
+package fr.poitiers.univ.m1.s2.aaw.projet.online_bank.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

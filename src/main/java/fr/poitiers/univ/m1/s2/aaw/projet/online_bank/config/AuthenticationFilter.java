@@ -1,8 +1,8 @@
 package fr.poitiers.univ.m1.s2.aaw.projet.online_bank.config;
 
-import fr.poitiers.univ.m1.s2.aaw.projet.online_bank.model.AuthToken;
+import fr.poitiers.univ.m1.s2.aaw.projet.online_bank.entity.AuthToken;
+import fr.poitiers.univ.m1.s2.aaw.projet.online_bank.entity.User;
 import fr.poitiers.univ.m1.s2.aaw.projet.online_bank.repository.AuthTokenRepository;
-import fr.poitiers.univ.m1.s2.aaw.projet.online_bank.model.User;
 import fr.poitiers.univ.m1.s2.aaw.projet.online_bank.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,13 +1,15 @@
-package fr.poitiers.univ.m1.s2.aaw.projet.online_bank.model;
+package fr.poitiers.univ.m1.s2.aaw.projet.online_bank.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -18,29 +20,41 @@ import java.util.List;
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column
     private String name;
 
     @Column
-    private String password;
-
-    @Column String email;
+    private String email;
 
     @OneToMany(mappedBy = "user")
     private List<Account> account;
 
-    public User(String name, String password, String email){
+    @Column
+    private String password;
+
+    @Column
+    private boolean admin;
+
+    public User(String name, String email, String password){
         this.name=name;
-        this.password = password;
         this.email = email;
+        this.password = password;
     }
 
     @Override
     @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
+        if(admin){
+            return Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        }
+        return null;
+    }
+
+    @Override
+    public String getPassword() {
         return null;
     }
 

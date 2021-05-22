@@ -1,11 +1,10 @@
 package fr.poitiers.univ.m1.s2.aaw.projet.online_bank;
 
 
-import fr.poitiers.univ.m1.s2.aaw.projet.online_bank.model.Account;
-import fr.poitiers.univ.m1.s2.aaw.projet.online_bank.model.User;
+import fr.poitiers.univ.m1.s2.aaw.projet.online_bank.entity.Account;
+import fr.poitiers.univ.m1.s2.aaw.projet.online_bank.entity.User;
 import fr.poitiers.univ.m1.s2.aaw.projet.online_bank.repository.AccountRepository;
 import fr.poitiers.univ.m1.s2.aaw.projet.online_bank.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -17,13 +16,11 @@ class Initializer implements CommandLineRunner {
 
     private final UserRepository repository;
     private final AccountRepository accountRepository;
-
-    @Autowired
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public Initializer(UserRepository repository, AccountRepository accountRepository, BCryptPasswordEncoder encoder) {
+    public Initializer(UserRepository repository, AccountRepository repo, BCryptPasswordEncoder encoder) {
         this.repository = repository;
-        this.accountRepository = accountRepository;
+        this.accountRepository = repo;
         this.bCryptPasswordEncoder = encoder;
     }
 
@@ -31,11 +28,15 @@ class Initializer implements CommandLineRunner {
     public void run(String... strings) {
 
         for (int i = 1; i < 5; i++) {
-            User user = new User("test" + i, this.bCryptPasswordEncoder.encode("test" + i), "test" + i + "@test.com");
+            User user = new User("test" + i,
+                    "test" + i + "@test.com",
+                    this.bCryptPasswordEncoder.encode("test" + i));
+
             repository.save(user);
-            Account comment = new Account(null, (long) (i * 100), user);
-            accountRepository.save(comment);
+            Account account = new Account((long) (i * 100), user);
+            accountRepository.save(account);
         }
 
     }
+
 }

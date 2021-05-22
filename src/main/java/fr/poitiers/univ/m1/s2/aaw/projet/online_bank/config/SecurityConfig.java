@@ -1,6 +1,6 @@
 package fr.poitiers.univ.m1.s2.aaw.projet.online_bank.config;
 
-import fr.poitiers.univ.m1.s2.aaw.projet.online_bank.model.AuthToken;
+import fr.poitiers.univ.m1.s2.aaw.projet.online_bank.entity.AuthToken;
 import fr.poitiers.univ.m1.s2.aaw.projet.online_bank.repository.AuthTokenRepository;
 import fr.poitiers.univ.m1.s2.aaw.projet.online_bank.service.UserService;
 import org.slf4j.Logger;
@@ -38,14 +38,13 @@ import java.util.Optional;
 
 @Configuration
 @EnableWebSecurity
-@Controller
 public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
 
     @Autowired
-    UserService userDetailsService;
+    public UserService userDetailsService;
 
     @Autowired
-    AuthTokenRepository authTokenRepository;
+    public AuthTokenRepository authTokenRepository;
 
     @Value("${com.auth.token}")
     private String authToken;
@@ -64,49 +63,50 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
 
     @Override
     public void configure(final WebSecurity web) throws Exception {
-        web.ignoring().mvcMatchers("/img/**");
+        web.ignoring().mvcMatchers("/img/**", "/*.js", "/*.css", "/*.html");
     }
 
-//    @Override
-//    protected void configure(final HttpSecurity http) throws Exception {
-//        http
-//                .exceptionHandling()
-//                .authenticationEntryPoint(new Http403ForbiddenEntryPoint())
-//                .and()
-//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-//
-//        http
-//                .authorizeRequests()
-//                .antMatchers("/api/user/login").permitAll()
-//                .antMatchers("/").permitAll()
-//                .antMatchers("/login").permitAll()
-//                .antMatchers("/account").permitAll()
-//                .antMatchers("/error").permitAll()
-//                .anyRequest().authenticated();
-//
-//        http
-//                .addFilterBefore(new AuthenticationFilter(authTokenRepository, userDetailsService, authToken), UsernamePasswordAuthenticationFilter.class);
-//
-//        http
-//                .logout()
-//                .logoutUrl("/api/user/logout")
-//                .logoutSuccessHandler(getLogoutSuccessHandler())
-//                .logoutSuccessUrl("/login")
-//                .invalidateHttpSession(true)
-//                .deleteCookies(authToken, csrfCookieTokenName);
-//
-//        http
-//                .csrf()
-//                .requireCsrfProtectionMatcher(request ->
-//                        ("/api/user/login".equals(request.getRequestURI())
-//                                || ("/api/account".equals(request.getRequestURI()) && HttpMethod.POST.matches(request.getMethod())
-//                        ))
-//                )
-//                .csrfTokenRepository(getCsrfTokenRepository())
-//        ;
-//
-//
-//    }
+    @Override
+    protected void configure(final HttpSecurity http) throws Exception {
+        http
+                .exceptionHandling()
+                .authenticationEntryPoint(new Http403ForbiddenEntryPoint())
+                .and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+        http
+                .authorizeRequests()
+                .antMatchers("/api/user/login",
+                        "/",
+                        "/index",
+                        "/login",
+                        "/espacePerso",
+                        "/error",
+                        "/css/*").permitAll()
+                .anyRequest().authenticated();
+
+        http
+                .addFilterBefore(new AuthenticationFilter(authTokenRepository, userDetailsService, authToken), UsernamePasswordAuthenticationFilter.class);
+
+        http
+                .logout()
+                .logoutUrl("/api/logout")
+                .logoutSuccessHandler(getLogoutSuccessHandler())
+                .logoutSuccessUrl("/api/login")
+                .invalidateHttpSession(true)
+                .deleteCookies(authToken, csrfCookieTokenName);
+
+        http
+                .csrf()
+                .requireCsrfProtectionMatcher(request ->
+                        ("/api/login".equals(request.getRequestURI())
+                                || ("/api/accounts".equals(request.getRequestURI()) && HttpMethod.POST.matches(request.getMethod())
+                        ))
+                )
+                .csrfTokenRepository(getCsrfTokenRepository())
+        ;
+
+    }
 
 
     private CookieCsrfTokenRepository getCsrfTokenRepository() {
@@ -159,6 +159,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/").setViewName("forward:index.html");
+        registry.addViewController("/index").setViewName("forward:index.html");
+        registry.addViewController("/login").setViewName("forward:login.html");
+        registry.addViewController("/espacePerso").setViewName("forward:espacePerso.html");
     }
 
 

@@ -1,4 +1,4 @@
-package fr.poitiers.univ.m1.s2.aaw.projet.online_bank.web;
+package fr.poitiers.univ.m1.s2.aaw.projet.online_bank.endpoint;
 
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;
@@ -12,9 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 public class MyErrorController implements ErrorController {
 
     @RequestMapping("/error")
-    public String handleError(
-            HttpServletRequest request
-    ) {
+    public String handleError(HttpServletRequest request) {
 
         Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
 
@@ -26,7 +24,7 @@ public class MyErrorController implements ErrorController {
             if (statusCode == HttpStatus.FORBIDDEN.value() || statusCode == HttpStatus.UNAUTHORIZED.value()) {
                 return "login";
             } else if (statusCode == HttpStatus.CONFLICT.value()) {
-                return "account";
+                return "espacePerso";
             }
         }
         return "error";
