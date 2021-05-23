@@ -77,7 +77,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
 
         http
                 .authorizeRequests()
-                .antMatchers("/api/login",
+                .antMatchers("/api/user/login",
                         "/",
                         "/index",
                         "/login",

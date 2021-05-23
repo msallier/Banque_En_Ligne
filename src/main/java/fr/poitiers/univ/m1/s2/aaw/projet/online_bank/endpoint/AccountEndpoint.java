@@ -43,7 +43,7 @@ public class AccountEndpoint {
     void save(@RequestBody Account account) {
         User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        account.setUser(principal);
+        account.setUserId(principal.getUser_id());
         System.out.println(account);
         accountRepository.save(account);
     }
@@ -54,7 +54,7 @@ public class AccountEndpoint {
                 .findAll()
                 .stream()
                 .filter(account -> account.getId().equals(id))
-                .collect(Collectors.toList());;
+                .collect(Collectors.toList());
         return all;
     }
 

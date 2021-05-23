@@ -27,16 +27,14 @@ class Initializer implements CommandLineRunner {
     @Override
     public void run(String... strings) {
 
-        for (int i = 1; i < 5; i++) {
-            User user = new User("test" + i,
-                    "test" + i + "@test.com",
-                    this.bCryptPasswordEncoder.encode("test" + i));
+        User user = new User("test1",
+                "test1@test.com",
+                this.bCryptPasswordEncoder.encode("test1"));
 
-            repository.save(user);
-            Account account = new Account((long) (i * 100), user.getUser_id());
-            accountRepository.save(account);
-        }
+        repository.save(user);
 
+        Account account = new Account((long) (100000), user.getUser_id());
+        accountRepository.save(account);
     }
 
 }
