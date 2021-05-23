@@ -11,5 +11,6 @@ spring:
                 ddl-auto: update
             format_sql: true
         generate-ddl: false
+        database-platform: org.hibernate.dialect.PostgreSQLDialect
         hibernate:
             ddl-auto: update
