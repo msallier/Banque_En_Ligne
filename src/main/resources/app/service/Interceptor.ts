@@ -14,7 +14,7 @@ export function csrfInterceptor($location, $state) {
 //             document.body.setAttribute("data-csrf-token", headers);
 //             let csrfCookie = document.body.getAttribute("data-csrf-token");
 //             config.headers[headerName] = csrfCookie;
-//             return config;
+            return config;
         },
 
 //          response: (response) => {

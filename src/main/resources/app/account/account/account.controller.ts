@@ -19,6 +19,7 @@ export default class AccountCtrl {
     }
 
     $onInit() {
+        
         this.userService.getCurrentUser()
             .then((response) => {
                 this.id = response.id;
@@ -62,5 +63,7 @@ export default class AccountCtrl {
     showUser(user) {
         this.$state.go("user", {id: user.id})
     }
+
+
 
 }

@@ -82,7 +82,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
                         "/index",
                         "/login",
                         "/account",
-                        "/h2-console/**",
                         "/error",
                         "/css/*").permitAll()
                 .anyRequest().authenticated();
@@ -94,7 +93,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
                 .logout()
                 .logoutUrl("/api/user/logout")
                 .logoutSuccessHandler(getLogoutSuccessHandler())
-                .logoutSuccessUrl("/")
+                .logoutSuccessUrl("/api/user/login")
                 .invalidateHttpSession(true)
                 .deleteCookies(authToken, csrfCookieTokenName);
 

@@ -44,7 +44,6 @@ public class AccountEndpoint {
         User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         account.setUserId(principal.getId());
-        System.out.println(account);
         accountRepository.save(account);
     }
 
