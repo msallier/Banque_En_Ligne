@@ -21,21 +21,22 @@ public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long user_id;
 
-    @Column
+    @Column(name = "NAME")
     private String name;
 
-    @Column
+    @Column(name = "EMAIL")
     private String email;
 
     @OneToMany(mappedBy = "user")
+    @JoinColumn(name = "id")
     private List<Account> account;
 
-    @Column
+    @Column(name = "PASSWORD")
     private String password;
 
-    @Column
+    @Column(name = "ADMIN")
     private boolean admin;
 
     public User(String name, String email, String password){

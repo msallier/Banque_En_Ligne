@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.Date;
@@ -16,7 +17,11 @@ public class AuthToken {
 
     @Id
     private String token;
+
+    @Column(name = "USER_ID")
     private Long userId;
+
+    @Column(name = "EXPIRED_DATE")
     private Date expiredDate;
 
 }

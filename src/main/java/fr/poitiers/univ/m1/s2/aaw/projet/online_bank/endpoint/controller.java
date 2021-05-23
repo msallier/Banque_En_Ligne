@@ -95,7 +95,7 @@ public class controller {
             final User user = (User) authentication.getPrincipal();
             String sessionId = UUID.randomUUID().toString();
             Date expiredDate = new Date(System.currentTimeMillis() + expiredTime);
-            AuthToken token = new AuthToken(sessionId, user.getId(), expiredDate);
+            AuthToken token = new AuthToken(sessionId, user.getUser_id(), expiredDate);
             authTokenRepository.save(token);
             log.info("new session : {} expired in {} user {}", token.getToken(), token.getExpiredDate().toString(), user.getUsername());
 
