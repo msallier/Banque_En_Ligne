@@ -39,13 +39,6 @@ public class AccountEndpoint {
         return all;
     }
 
-    @PostMapping
-    void save(@RequestBody Account account) {
-        User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        account.setUserId(principal.getId());
-        accountRepository.save(account);
-    }
 
     @GetMapping("/{id}")
     Collection<Account> getUserAccounts(@PathVariable("id") Long id) {

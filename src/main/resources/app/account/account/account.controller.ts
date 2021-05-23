@@ -19,7 +19,7 @@ export default class AccountCtrl {
     }
 
     $onInit() {
-        
+ 
         this.userService.getCurrentUser()
             .then((response) => {
                 this.id = response.id;
@@ -33,18 +33,6 @@ export default class AccountCtrl {
                 this.accounts = response.data;
                 return response;
             });
-    }
-
-    async creeCompte() {
-        if (this.name && this.balance) {
-            await this.loadAccount();
-            let response = await this.accountServiceName.addAccount(this.name, this.balance);
-            if (response.status === 200) {
-                this.closeNewAccount();
-            }
-        }else{
-            alert("Erreur de saisie.")
-        }
     }
 
     async virement() {
@@ -65,5 +53,5 @@ export default class AccountCtrl {
     }
 
 
-
+    
 }

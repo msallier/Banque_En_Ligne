@@ -3,8 +3,11 @@ package fr.poitiers.univ.m1.s2.aaw.projet.online_bank;
 
 import fr.poitiers.univ.m1.s2.aaw.projet.online_bank.entity.Account;
 import fr.poitiers.univ.m1.s2.aaw.projet.online_bank.entity.User;
+import fr.poitiers.univ.m1.s2.aaw.projet.online_bank.entity.Virement;
 import fr.poitiers.univ.m1.s2.aaw.projet.online_bank.repository.AccountRepository;
 import fr.poitiers.univ.m1.s2.aaw.projet.online_bank.repository.UserRepository;
+import fr.poitiers.univ.m1.s2.aaw.projet.online_bank.repository.VirementRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -13,15 +16,17 @@ import org.springframework.stereotype.Component;
 @Component
 class Initializer implements CommandLineRunner {
 
-    private final UserRepository repository;
-    private final AccountRepository accountRepository;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    private UserRepository repository;
 
-    public Initializer(UserRepository repository, AccountRepository repo, BCryptPasswordEncoder encoder) {
-        this.repository = repository;
-        this.accountRepository = repo;
-        this.bCryptPasswordEncoder = encoder;
-    }
+    @Autowired
+    private AccountRepository accountRepository;
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Autowired
+    private VirementRepository virementRepository;
 
     @Override
     public void run(String... strings) {
@@ -36,6 +41,14 @@ class Initializer implements CommandLineRunner {
             repository.save(user);
             Account comment = new Account(null, user.getId(), "PEL", 10000.0);
             accountRepository.save(comment);
+            Virement virement = Virement.builder()
+                    .id(null)
+                    .idCompteDepuis((long) i)
+                    .idCompteVers((long) ((i+1)%5))
+                    .montant(100)
+                    .motif("Virement" + i)
+                    .build();
+            virementRepository.save(virement);
         }
 
     }

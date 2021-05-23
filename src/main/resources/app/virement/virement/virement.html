@@ -1,0 +1,62 @@
+<header>
+  <span ng-if="ctrl.userService.user"
+        class="fas fa-user-alt fa-2x"
+        title="Connecté en tant que {{ctrl.userService.user.email}}"
+  > {{ctrl.userService.user.name}}</span>
+    <span class="title"><b>La Bling Banque</b></span>
+    <span ng-if="ctrl.userService.user"
+          title="Se déconnecter"
+          class="fas fa-sign-out-alt fa-2x"
+          ng-click="ctrl.userService.deconnecter();"></span>
+</header>
+
+<main class="App-intro">
+    <div>
+        <div>
+            <h2>Virement Recu</h2>
+            <h3 ng-If="ctrl.virementsRecu.length==0">Aucun Virement Recu</h3>
+            <table ng-If="ctrl.virementsRecu.length>0" class="responstable">
+                <tr>
+                    <td>#</td>
+                    <td>Compte vers</td>
+                    <td>Compte depuis</td>
+                    <td>Montant(€)</td>
+                    <td>Motif</td>
+
+                </tr>
+                <tr ng-repeat="virement in ctrl.virementsRecu track by $index">
+                    <td>{{$index + 1}}</td>
+                    <td>{{virement.nameUserCompteVers}} : {{virement.nomCompteVers}}</td>
+                    <td>{{virement.nameUserCompteDepuis}} : {{virement.nomCompteDepuis}}</td>
+                    <td>{{virement.montant}}</td>
+                    <td>{{virement.motif}}</td>
+                </tr>
+            </table>
+        </div>
+        <div>
+            <h2>Virement Effectué</h2>
+            <h3 ng-If="ctrl.virementsEffectue.length==0">Aucun Virement effectué</h3>
+            <table ng-If="ctrl.virementsEffectue.length>0" class="responstable">
+                <tr>
+                    <td>#</td>
+                    <td>Compte depuis</td>
+                    <td>Compte vers</td>
+                    <td>Montant(€)</td>
+                    <td>Motif</td>
+
+                </tr>
+                <tr ng-repeat="virement in ctrl.virementsEffectue track by $index">
+                    <td>{{$index + 1}}</td>
+                    <td>{{virement.nameUserCompteDepuis}} : {{virement.nomCompteDepuis}}</td>
+                    <td>{{virement.nameUserCompteVers}} : {{virement.nomCompteVers}}</td>
+                    <td>{{virement.montant}}</td>
+                    <td>{{virement.motif}}</td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+    <div ui-view="user">
+
+    </div>
+</main>

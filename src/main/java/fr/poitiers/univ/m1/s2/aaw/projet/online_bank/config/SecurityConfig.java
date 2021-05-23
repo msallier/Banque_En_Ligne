@@ -78,10 +78,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
         http
                 .authorizeRequests()
                 .antMatchers("/api/user/login",
+                        "api/virement/recu/*",
+                        "api/virement/effectue/*",
                         "/",
                         "/index",
                         "/login",
                         "/account",
+                        "/virement",
                         "/error",
                         "/css/*").permitAll()
                 .anyRequest().authenticated();
@@ -168,6 +171,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
         registry.addViewController("/index").setViewName("forward:index.html");
         registry.addViewController("/login").setViewName("forward:login.html");
         registry.addViewController("/account").setViewName("forward:account.html");
+        registry.addViewController("/virement").setViewName("forward:virement.html");
     }
 
 
