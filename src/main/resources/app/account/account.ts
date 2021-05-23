@@ -1,12 +1,12 @@
 // @ts-ignore
 import angular from 'angular';
-import pagePerso from "./pagePerso/account";
+import pagePerso from "./account/account";
 import "../style/app.css";
 import "jquery";
 
 
 
-import AccountComponent from './pagePerso/account'
+import AccountComponent from './account/account'
 import uirouter from '@uirouter/angularjs';
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
