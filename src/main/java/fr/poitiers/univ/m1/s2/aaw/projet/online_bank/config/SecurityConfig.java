@@ -94,7 +94,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
                 .logout()
                 .logoutUrl("/api/user/logout")
                 .logoutSuccessHandler(getLogoutSuccessHandler())
-                .logoutSuccessUrl("/api/user/login")
+                .logoutSuccessUrl("/")
                 .invalidateHttpSession(true)
                 .deleteCookies(authToken, csrfCookieTokenName);
 
