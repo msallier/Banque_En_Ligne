@@ -28,6 +28,18 @@ export class AccountService {
         });
     }
 
+    addAccount(name,balance) {
+
+        return this.$http.post('/api/accounts', {name: name,balance:balance},
+            {
+                credentials: 'include',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+            })
+    }
+
 }
 
 export default "AccountService";
