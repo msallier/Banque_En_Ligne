@@ -9,7 +9,7 @@ const component={
   template,
   controller,
   controllerAs: 'login'
-}
+};
 
 const LoginComponent = {
   name: 'login',

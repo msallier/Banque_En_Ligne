@@ -18,11 +18,12 @@ export class AccountService {
             })
             .catch((e) => {
             });
+
     }
 
     loadUserAccounts(id) {
 
-        return this.$http.get(`/api/accounts/${id}`, {
+        return this.$http.get(`/api/user/accounts/${id}`, {
             credentials: 'include',
         });
     }

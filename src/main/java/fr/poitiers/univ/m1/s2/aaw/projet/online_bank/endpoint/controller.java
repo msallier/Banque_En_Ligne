@@ -57,11 +57,16 @@ public class controller {
     }
 
     @GetMapping("/accounts/{id}")
-    List<Account> getUserAccounts(@PathVariable("id") Long id) {
+    List<Account> getAccountsById(@PathVariable("id") Long id) {
         List<Account> all = accountService.getAllById(id);
         return all;
     }
 
+    @GetMapping("/accounts/user/{id}")
+    List<Account> getUserAccounts(@PathVariable("id") Long id) {
+        List<Account> all = accountService.getAllById(id);
+        return all;
+    }
 
 
     @GetMapping("/current")

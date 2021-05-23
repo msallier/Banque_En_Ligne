@@ -16,14 +16,14 @@ export class UserService {
 
     deconnecter() {
         this.user = undefined;
-        this.$http.post('/api/user/logout', undefined, {credentials: 'include'})
+        this.$http.post('/api/logout', undefined, {credentials: 'include'})
             .then(() => {
                 document.location.href = "/index";
             })
     }
 
     login(data) {
-        return this.$http.post("/api/user/login", data, {
+        return this.$http.post("/api/login", data, {
             transformRequest: angular.identity,
             headers: {'Content-Type': undefined}
         })
@@ -32,7 +32,7 @@ export class UserService {
     getCurrentUser() {
 
         return this.$http
-            .get("/api/user/current", {
+            .get("/api/current", {
                 credentials: 'include',
             })
             .then(resp => {
@@ -47,7 +47,7 @@ export class UserService {
 
     getUser(id){
         return this.$http
-            .get(`/api/user/${id}`, {
+            .get(`/api/${id}`, {
                 credentials: 'include',
             })
             .then(resp => {

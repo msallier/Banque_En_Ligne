@@ -11,7 +11,7 @@ export default class LoginCtrl {
     }
 
     $onInit() {
-        //this.logged();
+        this.logged();
     }
 
     async login() {
@@ -31,7 +31,7 @@ export default class LoginCtrl {
             .then((user) => {
                 if (user) {
                     this.logged = user;
-                   // document.location.href="/espacePerso";
+                    document.location.href="/espacePerso";
                 }
 
             })

@@ -38,6 +38,7 @@ import java.util.Optional;
 
 @Configuration
 @EnableWebSecurity
+@Controller
 public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
 
     @Autowired
@@ -76,8 +77,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
 
         http
                 .authorizeRequests()
-                .antMatchers("/api/user/login",
-                        "/",
+                .antMatchers("/",
                         "/index",
                         "/login",
                         "/espacePerso",
