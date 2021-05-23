@@ -7,12 +7,14 @@ import fr.poitiers.univ.m1.s2.aaw.projet.online_bank.entity.Virement;
 import fr.poitiers.univ.m1.s2.aaw.projet.online_bank.repository.AccountRepository;
 import fr.poitiers.univ.m1.s2.aaw.projet.online_bank.repository.UserRepository;
 import fr.poitiers.univ.m1.s2.aaw.projet.online_bank.repository.VirementRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
+@Slf4j
 class Initializer implements CommandLineRunner {
 
     @Autowired
@@ -39,6 +41,9 @@ class Initializer implements CommandLineRunner {
             }
             repository.save(user);
             Account comment = new Account(null, user.getId(), "PEL", 10000.0);
+
+            log.info("User " + i + " mdp : " + user.getPassword(), user);
+
             accountRepository.save(comment);
             for(int j = 0; j < 5; ++j) {
                 Virement virement = Virement.builder()
@@ -49,6 +54,7 @@ class Initializer implements CommandLineRunner {
                         .motif("Virement" + i)
                         .build();
                 virementRepository.save(virement);
+
             }
         }
 
