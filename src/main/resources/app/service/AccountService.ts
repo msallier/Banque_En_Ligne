@@ -23,7 +23,7 @@ export class AccountService {
 
     loadUserAccounts(id) {
 
-        return this.$http.get(`/api/user/accounts/${id}`, {
+        return this.$http.get(`/api/accounts/${id}`, {
             credentials: 'include',
         });
     }

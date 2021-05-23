@@ -18,6 +18,9 @@ export default class LoginCtrl {
         let data = new FormData();
         data.append("username", this.id);
         data.append("password", this.password);
+        console.log("test");
+        console.log("username : " + this.id);
+        console.log("password : " + this.password);
         await this.userService.getCurrentUser();
         this.userService.login(data)
             .then((response) => {

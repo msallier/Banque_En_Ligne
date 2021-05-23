@@ -77,7 +77,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
 
         http
                 .authorizeRequests()
-                .antMatchers("/",
+                .antMatchers("/api/login",
+                        "/",
                         "/index",
                         "/login",
                         "/espacePerso",
@@ -90,16 +91,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
 
         http
                 .logout()
-                .logoutUrl("/api/logout")
+                .logoutUrl("/api/user/logout")
                 .logoutSuccessHandler(getLogoutSuccessHandler())
-                .logoutSuccessUrl("/api/login")
+                .logoutSuccessUrl("/api/user/login")
                 .invalidateHttpSession(true)
                 .deleteCookies(authToken, csrfCookieTokenName);
 
         http
                 .csrf()
                 .requireCsrfProtectionMatcher(request ->
-                        ("/api/login".equals(request.getRequestURI())
+                        ("/api/user/login".equals(request.getRequestURI())
                                 || ("/api/accounts".equals(request.getRequestURI()) && HttpMethod.POST.matches(request.getMethod())
                         ))
                 )
