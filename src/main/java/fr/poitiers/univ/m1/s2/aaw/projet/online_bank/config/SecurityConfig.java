@@ -81,7 +81,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
                         "/",
                         "/index",
                         "/login",
-                        "/espacePerso",
+                        "/account",
                         "/h2-console/**",
                         "/error",
                         "/css/*").permitAll()
