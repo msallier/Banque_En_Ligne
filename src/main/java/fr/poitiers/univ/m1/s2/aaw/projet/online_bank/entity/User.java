@@ -11,31 +11,20 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "User")
+@Entity(name="UserMember")
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long user_id;
-
-    @Column(name = "NAME")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
-
-    @Column(name = "EMAIL")
     private String email;
-
-    @Column(name = "PASSWORD")
     private String password;
-
-    @Column(name = "ADMIN")
     private boolean admin;
-
 
     public User(String name, String email, String password){
         this.name=name;
@@ -49,11 +38,6 @@ public class User implements UserDetails {
         if(admin){
             return Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN"));
         }
-        return null;
-    }
-
-    @Override
-    public String getPassword() {
         return null;
     }
 

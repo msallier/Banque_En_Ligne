@@ -13,17 +13,10 @@ import javax.persistence.*;
 public class Account {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name = "balance")
-    private Long balance;
-
-    @Column(name = "USER_ID")
     private Long userId;
+    private String name;
+    private double balance;
 
-    public Account(Long balance, Long user){
-        this.balance = balance;
-        this.userId = user;
-    }
 }

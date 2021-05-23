@@ -43,7 +43,7 @@ public class AccountEndpoint {
     void save(@RequestBody Account account) {
         User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        account.setUserId(principal.getUser_id());
+        account.setUserId(principal.getId());
         System.out.println(account);
         accountRepository.save(account);
     }
