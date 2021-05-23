@@ -30,7 +30,6 @@ public class User implements UserDetails {
     private String email;
 
     @OneToMany(mappedBy = "user")
-    @JoinColumn(name = "id")
     private List<Account> account;
 
     @Column(name = "PASSWORD")
