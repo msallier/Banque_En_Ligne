@@ -19,11 +19,11 @@ public class Account {
     @Column(name = "balance")
     private Long balance;
 
-    @ManyToOne
-    private User user;
+    @Column(name = "USER_ID")
+    private Long userId;
 
-    public Account(Long balance, User user){
+    public Account(Long balance, Long user){
         this.balance = balance;
-        this.id = id;
+        this.userId = user;
     }
 }

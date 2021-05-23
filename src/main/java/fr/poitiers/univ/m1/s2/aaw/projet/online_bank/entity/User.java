@@ -17,6 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "User")
 public class User implements UserDetails {
 
     @Id
@@ -29,14 +30,12 @@ public class User implements UserDetails {
     @Column(name = "EMAIL")
     private String email;
 
-    @OneToMany(mappedBy = "user")
-    private List<Account> account;
-
     @Column(name = "PASSWORD")
     private String password;
 
     @Column(name = "ADMIN")
     private boolean admin;
+
 
     public User(String name, String email, String password){
         this.name=name;

@@ -33,7 +33,7 @@ class Initializer implements CommandLineRunner {
                     this.bCryptPasswordEncoder.encode("test" + i));
 
             repository.save(user);
-            Account account = new Account((long) (i * 100), user);
+            Account account = new Account((long) (i * 100), user.getUser_id());
             accountRepository.save(account);
         }
 

@@ -5,11 +5,6 @@ spring:
         url: jdbc:postgresql://${POSTGRESQL_ADDON_HOST}:${POSTGRESQL_ADDON_PORT}/${POSTGRESQL_ADDON_DB}
         driver-class-name: org.postgresql.Driver
 
-    h2:
-        console:
-            #http://localhost/h2-console
-            enabled: true
-
     jpa:
         show-sql: true
         properties:
