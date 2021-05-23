@@ -33,7 +33,7 @@ class Initializer implements CommandLineRunner {
         for (int i = 1; i < 5; i++) {
             User user = new User("test" + i,
                     "test" + i + "@test.com",
-                    "test" + i);
+                    this.bCryptPasswordEncoder.encode("test" + i));
             if(i==1){
                 user.setAdmin(true);
             }
