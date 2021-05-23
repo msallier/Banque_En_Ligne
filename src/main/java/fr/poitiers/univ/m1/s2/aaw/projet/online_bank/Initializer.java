@@ -44,7 +44,7 @@ class Initializer implements CommandLineRunner {
             Virement virement = Virement.builder()
                     .id(null)
                     .idCompteDepuis((long) i)
-                    .idCompteVers((long) ((i+1)%5))
+                    .idCompteVers((long) ((i+1)%4)+1)
                     .montant(100)
                     .motif("Virement" + i)
                     .build();

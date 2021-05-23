@@ -3,13 +3,28 @@
 <head>
   <meta charset="UTF-8">
 
-  <title>La grosse moula</title>
+  <title>La Grosse Moula</title>
   <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
   <link rel="stylesheet"  href="../app/login/login/login.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <base href="/">
 </head>
 <body >
+  <header>
+    <span ng-if="ctrl.userService.user"
+          class="fas fa-user-alt fa-2x"
+          title="Connecté en tant que {{ctrl.userService.user.email}}"
+    > {{ctrl.userService.user.name}}</span>
+      <span class="title"><b>La Bling Banque</b></span>
+      
+      <span ng-if="ctrl.userService.user"
+            title="Se déconnecter"
+            class="fas fa-sign-out-alt fa-2x"
+            ng-click="ctrl.userService.deconnecter();">
+          </span>
+  
+  </header>
+
 <div ui-view="main">
 
 </div>
