@@ -31,6 +31,6 @@ module('login', [
             .state(login.name, login.state)
 
 
-    }])
-;
+    }]);
+
 bootstrap(document.body, ['login']);

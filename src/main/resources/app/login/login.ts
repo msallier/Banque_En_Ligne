@@ -45,7 +45,7 @@ module('login', [
 
         $stateProvider
             .state(login.name, login.state)
-            .state(error.name, error.state);
+            .state(error.name, error.state)
 
     }])
 ;
