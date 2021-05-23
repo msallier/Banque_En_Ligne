@@ -14,6 +14,7 @@ export class UserService {
         return this._user;
     }
 
+    
     deconnecter() {
         this.user = undefined;
         this.$http.post('/api/logout', undefined, {credentials: 'include'})
