@@ -49,4 +49,5 @@ module('login', [
 
     }])
 ;
+
 bootstrap(document.body, ['login']);

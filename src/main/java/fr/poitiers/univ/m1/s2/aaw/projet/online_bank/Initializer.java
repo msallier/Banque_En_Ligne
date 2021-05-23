@@ -9,7 +9,6 @@ import fr.poitiers.univ.m1.s2.aaw.projet.online_bank.repository.UserRepository;
 import fr.poitiers.univ.m1.s2.aaw.projet.online_bank.repository.VirementRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -41,14 +40,16 @@ class Initializer implements CommandLineRunner {
             repository.save(user);
             Account comment = new Account(null, user.getId(), "PEL", 10000.0);
             accountRepository.save(comment);
-            Virement virement = Virement.builder()
-                    .id(null)
-                    .idCompteDepuis((long) i)
-                    .idCompteVers((long) ((i+1)%4)+1)
-                    .montant(100)
-                    .motif("Virement" + i)
-                    .build();
-            virementRepository.save(virement);
+            for(int j = 0; j < 5; ++j) {
+                Virement virement = Virement.builder()
+                        .id(null)
+                        .idCompteDepuis((long) i)
+                        .idCompteVers((long) ((j + 1) % 4) + 1)
+                        .montant(100)
+                        .motif("Virement" + i)
+                        .build();
+                virementRepository.save(virement);
+            }
         }
 
     }
