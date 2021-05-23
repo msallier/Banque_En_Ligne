@@ -82,7 +82,7 @@ class UserEndpoint {
             tokenCookie.setHttpOnly(true);
             tokenCookie.setMaxAge(expiredTime);
             response.addCookie(tokenCookie);
-            response.sendRedirect("/espacePerso");
+            response.sendRedirect("/account");
         } catch (Exception e) {
             log.info("Couple login/password incorrect");
             response.sendError(HttpStatus.LOCKED.value());

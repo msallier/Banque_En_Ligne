@@ -3,7 +3,7 @@
         class="fas fa-user-alt fa-2x"
         title="Connecté en tant que {{ctrl.userService.user.email}}"
   > {{ctrl.userService.user.name}}</span>
-    <span class="title"><b>La grosse moula</b></span>
+    <span class="title"><b>La Bling Banque</b></span>
     <span ng-if="ctrl.userService.user"
           title="Se déconnecter"
           class="fas fa-sign-out-alt fa-2x"
@@ -11,12 +11,36 @@
 </header>
 
 <main class="App-intro">
-    <div class="comments-container">
+    <div>
+        <table class="responstable">
+            <tr>
+                <td>#</td>
+                <td>Nom</td>
+                <td>Solde(€)</td>
+            </tr>
+            <tr ng-repeat="account in ctrl.accounts track by $index">
+                <td>{{$index+1}}</td>
+                <td>{{account.name}}</td>
+                <td>{{account.balance}}</td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <label for="name">Nom du compte</label>
+        <input id="name" name="name" ng-model="ctrl.name" type="text"/>
+        <label for="balance">Solde(€)</label>
+        <input id="balance"
+               name="balance" type="number" min="0"
+               ng-model="ctrl.balance"/>
 
-      <div ng-repeat="account in ctrl.accounts track by $index" class="comment" >
-        <p>{{account.name}}</p>
+        <div class="login-action-div">
+            <button ng-click="ctrl.creeCompte()">Créer compte</button>
+        </div>
+    </div>
+    <div>
 
-      </div>
+        <button ng-click="ctrl.virement()">Afficher les virements</button>
+
     </div>
     <div ui-view="user">
 
