@@ -5,3 +5,11 @@ spring:
         url: jdbc:postgresql://${POSTGRESQL_ADDON_HOST}:${POSTGRESQL_ADDON_PORT}/${POSTGRESQL_ADDON_DB}
         driver-class-name: org.postgresql.Driver
 
+    jpa:
+        properties:
+            hibernate:
+                ddl-auto: update
+            format_sql: true
+        generate-ddl: false
+        hibernate:
+            ddl-auto: update
