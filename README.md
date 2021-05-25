@@ -1,12 +1,26 @@
+# Projet Sécurité AAW
+Participant : 
+* MENNETEAU Charly
+* PILARDEAU Dylan
+* SALLIER Maxime
+
+## Lancement en local
+
+Ouvrir le projet Maven 'Banque-en-ligne' avec votre IDE préféré
+
 Run BanqueEnLigneApplication.java
 
-### `yarn install`
+Puis, il faut lancer les commandes suivantes dans un terminal, dans le répertoire du projet :
 
-### `yarn start`
+ ```yarn install```
 
-Runs the app in the development mode.\
-Open [http://localhost:8080](http://localhost:8080) to view it in the browser.
+```yarn start```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Puis rendez-vous sur ce lien [http://localhost:8080](http://localhost:8080) 
 
+
+
+## Partie production
+
+Le projet est disponible en ligne, à l'url suivant :
+[https://ekipkorp.cleverapps.io](https://ekipkorp.cleverapps.io)
